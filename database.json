@@ -1,0 +1,83 @@
+{
+  "profile": {
+    "name": "yash",
+    "role": "Senior Dev"
+  },
+  "stats": {
+    "compiles": 30,
+    "linesWritten": 103,
+    "solvedCount": 1,
+    "activeChallengeId": "prime"
+  },
+  "masteredConcepts": {
+    "Variables": 100,
+    "Conditionals": 100,
+    "Loops": 100,
+    "Functions": 100,
+    "Arrays/Lists": 100
+  },
+  "chatHistory": [
+    {
+      "role": "user",
+      "content": "Explain how my code works and break down its structural logic.",
+      "timestamp": "2026-10-14T01:27:59.452Z"
+    },
+    {
+      "role": "assistant",
+      "content": "**Code Explanation and Structural Logic Breakdown**\n=====================================================\n\nYour code calculates the factorial of a given number using recursion. Let's dive into the details.\n\n**Function Definition**\n--------------------\n\n```python\ndef factorial(n):\n```\n\nThis line defines a function named `factorial` that takes one argument, `n`.\n\n**Base Case**\n-------------\n\n```python\nif n <= 1:\n    return 1\n```\n\nThis is the base case of the recursion. If the input `n` is less than or equal to 1, the function returns 1. This is because the factorial of 0 and 1 is defined to be 1.\n\n**Recursive Case**\n-----------------\n\n```python\nreturn n * factorial(n - 1)\n```\n\nThis is the recursive case. If the input `n` is greater than 1, the function calls itself with the argument `n - 1` and multiplies the result by `n`. This process continues until the base case is reached.\n\n**Test Cases**\n--------------\n\n```python\nprint(\"Factorial of 5:\", factorial(5))  # Expected: 120\n```\n\nThis line tests the `factorial` function with the input 5 and prints the result.\n\n**Structural Logic Breakdown**\n-----------------------------\n\n1. The function `factorial` takes an integer `n` as input.\n2. If `n` is less than or equal to 1, the function returns 1 (base case).\n3. If `n` is greater than 1, the function calls itself with `n - 1` and multiplies the result by `n` (recursive case).\n4. The recursion continues until the base case is reached.\n5. The final result is returned and printed.\n\n**Example Walkthrough**\n----------------------\n\nLet's calculate the factorial of 5 using your code:\n\n1. `factorial(5)` is called.\n2. Since `n` is greater than 1, the recursive case is executed: `factorial(5) = 5 * factorial(4)`.\n3. `factorial(4)` is called.\n4. Since `n` is greater than 1, the recursive case is executed: `factorial(4) = 4 * factorial(3)`.\n5. `factorial(3)` is called.\n6. Since `n` is greater than 1, the recursive case is executed: `factorial(3) = 3 * factorial(2)`.\n7. `factorial(2)` is called.\n8. Since `n` is greater than 1, the recursive case is executed: `factorial(2) = 2 * factorial(1)`.\n9. `factorial(1)` is called.\n10. Since `n` is less than or equal to 1, the base case is reached: `factorial(1) = 1`.\n11. The result is propagated back up the call stack: `factorial(2) = 2 * 1 = 2`.\n12. `factorial(3) = 3 * 2 = 6`.\n13. `factorial(4) = 4 * 6 = 24`.\n14. `factorial(5) = 5 * 24 = 120`.\n15. The final result is returned and printed: `120`.\n\nYour code works correctly and calculates the factorial of a given number using recursion. Well done!",
+      "timestamp": "2026-10-14T01:28:38.018Z"
+    },
+    {
+      "role": "user",
+      "content": "I'm stuck. Can you give me a Socratic hint to help me figure out the next step without writing the code for me?",
+      "timestamp": "2026-10-14T15:41:16.383Z"
+    },
+    {
+      "role": "assistant",
+      "content": "**Socratic Hint** \n=====================================\n\nYou're close, but you're trying to calculate the Fibonacci sequence using a different approach. Think about the Fibonacci sequence: each number is the sum of the two preceding ones, usually starting with 0 and 1.\n\nIn your code, you're using a simple loop to generate the sequence. However, this approach is not efficient for large values of `n`. Can you think of a way to optimize this process?\n\n**Hint:** Consider using a mathematical formula to calculate the `n`-th Fibonacci number directly, without generating the entire sequence. This approach is known as the \"closed-form expression\" for the Fibonacci sequence.\n\n**Question:** What mathematical formula can you use to calculate the `n`-th Fibonacci number?",
+      "timestamp": "2026-10-14T15:41:49.185Z"
+    },
+    {
+      "role": "user",
+      "content": "I'm stuck. Can you give me a Socratic hint to help me figure out the next step without writing the code for me?",
+      "timestamp": "2026-10-15T07:08:39.586Z"
+    },
+    {
+      "role": "assistant",
+      "content": "**Socratic Hint** ===================================== You're trying to filter the `DEVELOPERS` table based on the `experience` column. Your current query is close, but it's only selecting rows where `experience` is greater than or equal to 4. What if you want to select rows where `experience` is greater than or equal to 4, but also include rows where `experience` is exactly 4? Can you think of a way to modify your query to achieve this? **Hint:** Think about the difference between `>=` and `=` operators in SQL. **Question:** How can you modify your query to include rows where `experience` is exactly 4?",
+      "timestamp": "2026-10-15T07:09:05.575Z"
+    },
+    {
+      "role": "user",
+      "content": "Explain how my code works and break down its structural logic.",
+      "timestamp": "2026-11-02T05:15:58.085Z"
+    },
+    {
+      "role": "assistant",
+      "content": "🤖 **BugSense AI Mentor**\n\nVanakkam! Unnoda code execute aaguradhukku ready-ah irukku.\n\n💡 **Tips:**\n• Python-la inputs vaangum podhu `int(input(...))` use panrathu correct method.\n• Indha code-la first number & second number enter panna output correct-ah sum calculate aagum.\n• Any doubt irundha kooda kela type panni kekaalam!",
+      "timestamp": "2026-11-02T05:16:29.417Z"
+    },
+    {
+      "role": "user",
+      "content": "Explain how my code works and break down its structural logic.",
+      "timestamp": "2026-11-02T07:20:40.488Z"
+    },
+    {
+      "role": "assistant",
+      "content": "🤖 **BugSense AI Mentor**\n\nVanakkam! Unnoda code execute aaguradhukku ready-ah irukku.\n\n💡 **Tips:**\n• Python-la inputs vaangum podhu `int(input(...))` use panrathu correct method.\n• Indha code-la first number & second number enter panna output correct-ah sum calculate aagum.\n• Any doubt irundha kooda kela type panni kekaalam!",
+      "timestamp": "2026-11-02T07:21:11.745Z"
+    }
+  ],
+  "codeCache": {
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Developer Team Database</title>\n  <style>\n    body {\n      margin: 0;\n      padding: 30px;\n      background: linear-gradient(135deg, #0f172a, #1e1b4b);\n      font-family: 'Segoe UI', system-ui, sans-serif;\n      color: #f1f5f9;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      min-height: 100vh;\n    }\n    .table-container {\n      width: 100%;\n      max-width: 800px;\n      background: rgba(30, 41, 59, 0.7);\n      border: 1px solid rgba(255, 255, 255, 0.08);\n      border-radius: 16px;\n      padding: 24px;\n    }\n    h2 {\n      margin: 0 0 16px 0;\n      font-size: 1.4rem;\n      background: linear-gradient(to right, #a78bfa, #38bdf8);\n      -webkit-background-clip: text;\n      -webkit-text-fill-color: transparent;\n    }\n    table {\n      width: 100%;\n      border-collapse: collapse;\n    }\n    th {\n      padding: 10px 14px;\n      color: #94a3b8;\n      font-size: 0.85rem;\n      text-transform: uppercase;\n      border-bottom: 2px solid rgba(255, 255, 255, 0.05);\n    }\n    td {\n      padding: 10px 14px;\n      border-bottom: 1px solid rgba(255, 255, 255, 0.05);\n      font-size: 0.95rem;\n      color: #e2e8f0;\n    }\n    .badge {\n      display: inline-block;\n      padding: 3px 8px;\n      font-size: 0.75rem;\n      border-radius: 10px;\n      background: rgba(56, 189, 248, 0.15);\n      color: #38bdf8;\n    }\n    .badge.pro {\n      background: rgba(167, 139, 250, 0.15);\n      color: #a78bfa;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"table-container\">\n    <h2>Developer Team Database</h2>\n    <table>\n      <thead>\n        <tr>\n          <th>ID</th>\n          <th>Name</th>\n          <th>Language</th>\n          <th>Experience</th>\n          <th>Role</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>1</td>\n          <td>Tamil</td>\n          <td>Python</td>\n          <td>5 Years</td>\n          <td><span class=\"badge pro\">Senior Dev</span></td>\n        </tr>\n        <tr>\n          <td>2</td>\n          <td>Anand</td>\n          <td>TypeScript</td>\n          <td>4 Years</td>\n          <td><span class=\"badge\">Fullstack</span></td>\n        </tr>\n        <tr>\n          <td>3</td>\n          <td>Sarah</td>\n          <td>C++</td>\n          <td>7 Years</td>\n          <td><span class=\"badge pro\">Systems Lead</span></td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</body>\n</html>",
+    "python": "a=int(input(\"Enter first number:\"))\nb=int(input(\"Enter second number:\"))\nprint(\"sum=\",a+b)",
+    "typescript": "// TypeScript Interface and Class Demo\ninterface Developer {\n    name: string;\n    skills: string[];\n    experience: number;\n    greet(): string;\n}\n\nclass PolyglotDeveloper implements Developer {\n    constructor(\n        public name: string,\n        public skills: string[],\n        public experience: number\n    ) {}\n\n    greet(): string {\n        return `Hello, I am ${this.name}. I code in ${this.skills.length} languages!`;\n    }\n}\n\nconst dev: Developer = new PolyglotDeveloper(\n    \"Tamil\",\n    [\"Python\", \"TypeScript\", \"C++\", \"Java\", \"SQL\"],\n    5\n);\n\nconsole.log(\"=== TypeScript Output ===\");\nconsole.log(dev.greet());\nconsole.log(\"Skills:\", dev.skills.join(\", \"));\n",
+    "javascript": "// JavaScript Data Processing Demo\nconsole.log(\"=== JavaScript Output ===\");\n\nconst numbers = [10, 25, 30, 45, 50, 65, 80];\nconst evenNumbers = numbers.filter(n => n % 2 === 0);\nconst sum = evenNumbers.reduce((acc, curr) => acc + curr, 0);\n\nconsole.log(\"Original Numbers:\", numbers);\nconsole.log(\"Even Numbers:    \", evenNumbers);\nconsole.log(\"Sum of Evens:    \", sum);\nconsole.log(\"Status: Executed without error!\");\n",
+    "sql": "-- SQLite Database Execution\nCREATE TABLE IF NOT EXISTS DEVELOPERS (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    primary_language TEXT NOT NULL,\n    experience INTEGER\n);\n\nINSERT INTO DEVELOPERS (name, primary_language, experience) VALUES \n('Tamil', 'Python'),\n('Anand', 'TypeScript', 4),\n('Sarah', 'C++', 7),\n('Kumar', 'Java', 6);\n\nSELECT * FROM DEVELOPERS WHERE experience >= 4;\n",
+    "r": "# R Statistical Analysis Demo\nvector_data <- c(12, 15, 23, 40, 56, 78, 102, 140)\n\nmean_val <- mean(vector_data)\nmedian_val <- median(vector_data)\nsd_val <- sd(vector_data)\n\ncat(\"=== R Language Summary Statistics ===\\n\")\ncat(\"Dataset:         \", vector_data, \"\\n\")\ncat(\"Arithmetic Mean: \", mean_val, \"\\n\")\ncat(\"Median Value:    \", median_val, \"\\n\")\ncat(\"Standard Dev:    \", round(sd_val, 2), \"\\n\")\n",
+    "java": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"=== Java Program Execution ===\");\n        String developer = \"Tamil\";\n        int experience = 5;\n        \n        System.out.println(\"Developer: \" + developer);\n        System.out.println(\"Experience: \" + experience + \" Years\");\n        \n        int total = 0;\n        for (int i = 1; i <= 10; i++) {\n            total += i;\n        }\n        System.out.println(\"Sum of numbers 1 to 10: \" + total);\n        System.out.println(\"Status: Java executed successfully!\");\n    }\n}",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main() {\n    std::cout << \"=== C++ Execution Output ===\" << std::endl;\n    std::vector<int> scores = {85, 92, 78, 96, 88};\n    \n    int sum = std::accumulate(scores.begin(), scores.end(), 0);\n    double average = (double)sum / scores.size();\n    \n    std::cout << \"Scores count: \" << scores.size() << std::endl;\n    std::cout << \"Total Sum:    \" << sum << std::endl;\n    std::cout << \"Average:      \" << average << std::endl;\n    std::cout << \"Status: C++ executed successfully!\" << std::endl;\n    return 0;\n}",
+    "c": "#include <stdio.h>\n\nint main() {\n    printf(\"=== C Program Execution ===\\n\");\n    int numbers[] = {5, 12, 18, 24, 30};\n    int length = sizeof(numbers) / sizeof(numbers[0]);\n    int sum = 0;\n    \n    for (int i = 0; i < length; i++) {\n        sum += numbers[i];\n    }\n    \n    printf(\"Array items: 5, 12, 18, 24, 30\\n\");\n    printf(\"Total sum:   %d\\n\", sum);\n    printf(\"Average:     %.2f\\n\", (float)sum / length);\n    printf(\"Status: C program executed successfully!\\n\");\n    return 0;\n}",
+    "swift": "import Foundation\n\nprint(\"=== Swift Execution Output ===\")\n\nstruct Task {\n    var title: String\n    var isCompleted: Bool\n}\n\nlet tasks = [\n    Task(title: \"Initialize IDE Workspace\", isCompleted: true),\n    Task(title: \"Connect AI Sandbox Compiler\", isCompleted: true),\n    Task(title: \"Compile Code without Errors\", isCompleted: true)\n]\n\nfor task in tasks {\n    let icon = task.isCompleted ? \"✅\" : \"⏳\"\n    print(\"\\(icon) \\(task.title)\")\n}\nprint(\"Status: Swift executed successfully!\")"
+  }
+}

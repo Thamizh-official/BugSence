@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BugSence | Premium Multi-Language IDE & AI Assistant</title>
+  <meta name="description" content="An interactive online compiler and IDE playground running 15 programming languages client-side via WASM with an integrated Llama-3.1 AI coding assistant.">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Devicons for languages -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  
+  <!-- Main Styling -->
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+
+  <!-- IDE Header -->
+  <header class="ide-header">
+    <a href="#" class="logo" id="logo-ref">
+      <i class="fa-solid fa-bug-slash"></i><span>Bug</span>Sence
+    </a>
+
+    <!-- Workspace View Toggle Switcher -->
+    <div class="workspace-toggle" id="workspace-toggle-container">
+      <button class="toggle-btn active" id="toggle-ide-btn">
+        <i class="fa-solid fa-laptop-code"></i> IDE Workspace
+      </button>
+      <button class="toggle-btn" id="toggle-dash-btn">
+        <i class="fa-solid fa-chart-pie"></i> Student Dashboard
+      </button>
+    </div>
+    
+    <div class="header-actions">
+      <div class="server-status-pill online" id="server-status-pill" title="Server Connection Status">
+        <span class="status-dot"></span>
+        <span id="server-status-text">Server Online</span>
+      </div>
+      <button class="run-btn" id="run-button">
+        <i class="fa-solid fa-play"></i> Run Code
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+        <i class="fa-solid fa-moon" id="theme-icon-el"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main IDE Grid Workspace -->
+  <main class="ide-workspace">
+    
+    <!-- Sidebar: Language selector -->
+    <aside class="ide-sidebar">
+      <div class="sidebar-title">Languages (15)</div>
+      <ul class="language-list" id="language-list-container">
+        <!-- HTML Project (Run client-side) -->
+        <li class="language-item active" data-lang="html" data-mode="html">
+          <i class="devicon-html5-plain"></i> HTML
+        </li>
+        <li class="language-item" data-lang="python" data-mode="python">
+          <i class="devicon-python-plain"></i> Python
+        </li>
+        <li class="language-item" data-lang="typescript" data-mode="typescript">
+          <i class="devicon-typescript-plain"></i> TypeScript
+        </li>
+        <li class="language-item" data-lang="javascript" data-mode="javascript">
+          <i class="devicon-javascript-plain"></i> JavaScript
+        </li>
+        <li class="language-item" data-lang="sql" data-mode="sql">
+          <i class="fa-solid fa-database"></i> SQL
+        </li>
+        <li class="language-item" data-lang="r" data-mode="r">
+          <i class="devicon-r-original"></i> R Lang
+        </li>
+        <li class="language-item" data-lang="java" data-mode="java">
+          <i class="devicon-java-plain"></i> Java
+        </li>
+        <li class="language-item" data-lang="cpp" data-mode="cpp">
+          <i class="devicon-cplusplus-plain"></i> C++
+        </li>
+        <li class="language-item" data-lang="c" data-mode="c">
+          <i class="devicon-c-plain"></i> C Lang
+        </li>
+        <li class="language-item" data-lang="csharp" data-mode="csharp">
+          <i class="devicon-csharp-plain"></i> C#
+        </li>
+        <li class="language-item" data-lang="matlab" data-mode="matlab">
+          <i class="devicon-matlab-plain"></i> MATLAB (Octave)
+        </li>
+        <li class="language-item" data-lang="kotlin" data-mode="kotlin">
+          <i class="devicon-kotlin-plain"></i> Kotlin
+        </li>
+        <li class="language-item" data-lang="swift" data-mode="swift">
+          <i class="devicon-swift-plain"></i> Swift
+        </li>
+        <li class="language-item" data-lang="php" data-mode="php">
+          <i class="devicon-php-plain"></i> PHP
+        </li>
+      </ul>
+
+      <!-- Coding Challenges List -->
+      <div class="challenges-section">
+        <div class="sidebar-title"><i class="fa-solid fa-trophy"></i> Practice Challenges</div>
+        <ul class="challenges-list" id="challenges-list-container">
+          <!-- Populated by script.js -->
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Editor Pane (Fixed Box Card) -->
+    <section class="ide-editor-pane">
+      <div class="editor-box-card">
+        <div class="pane-header">
+          <div class="pane-title" id="editor-title">
+            <i class="fa-solid fa-file-code"></i> index.html
+          </div>
+          <div class="editor-header-badge">
+            <span class="editor-dot red"></span>
+            <span class="editor-dot yellow"></span>
+            <span class="editor-dot green"></span>
+          </div>
+        </div>
+        <!-- Monaco editor target -->
+        <div class="editor-element" id="editor-container"></div>
+      </div>
+    </section>
+
+    <!-- Draggable Resizer Splitter -->
+    <div class="resizer" id="drag-splitter"></div>
+
+    <!-- Output Pane (Fixed Box Card) -->
+    <section class="ide-output-pane">
+      <div class="output-box-card">
+        <div class="pane-header-tabs">
+          <button class="pane-tab active" id="tab-terminal-btn">
+            <i class="fa-solid fa-terminal"></i> Console
+          </button>
+          <button class="pane-tab" id="tab-mentor-btn">
+            <i class="fa-solid fa-graduation-cap"></i> AI Mentor
+          </button>
+        </div>
+
+        <!-- Tab Content: Console Logs -->
+        <div class="output-content active" id="content-terminal">
+          <div class="terminal-window" id="terminal-log">
+            <div class="terminal-header-meta">BugSence Output Terminal v1.0.0. Ready.</div>
+Click "Run Code" above to compile and execute program.
+          </div>
+        </div>
+
+        <!-- Tab Content: AI Mentor Chat -->
+        <div class="output-content" id="content-mentor">
+          <div class="ai-chat-container">
+            <div class="ai-chat-messages" id="mentor-chat-messages">
+              <div class="ai-message assistant">
+                <div class="ai-message-inner">
+                  👋 Hello! I am your <strong>BugSence AI Coding Mentor</strong>.
+                  <br><br>
+                  Write code in the editor and click "Run Code" to compile. If there is an error, I will diagnose it and help you learn.
+                  You can also ask me questions here, ask for hints, or get coding feedback!
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick action chips -->
+            <div class="ai-quick-actions">
+              <button class="ai-action-btn" id="chip-explain"><i class="fa-solid fa-circle-info"></i> Explain Code</button>
+              <button class="ai-action-btn" id="chip-hint"><i class="fa-regular fa-lightbulb"></i> Get Hint</button>
+              <button class="ai-action-btn" id="chip-bugs"><i class="fa-solid fa-bug"></i> Find Logic Bugs</button>
+              <button class="ai-action-btn" id="chip-clear" style="color: #f87171; border-color: rgba(239, 68, 68, 0.35);" title="Clear Chat History"><i class="fa-solid fa-trash-can"></i> Clear Chat</button>
+            </div>
+
+            <div class="ai-chat-input-wrapper">
+              <input type="text" id="ai-chat-input" placeholder="Ask your mentor a question..." />
+              <button id="ai-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading spinner for compiler runs -->
+        <div class="running-spinner" id="running-overlay">
+          <i class="fa-solid fa-circle-notch"></i>
+          <span id="loader-text">Compiling & Running...</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Diagnostic & Progress Dashboard View -->
+  <section class="dashboard-view" id="dashboard-view" style="display: none;">
+    <div class="dashboard-header">
+      <div class="student-welcome">
+        <h1>Welcome back, <span id="student-name">Student</span>! 👨‍💻</h1>
+        <p>Track your programming diagnostics, conceptual mastery, and practice challenge history.</p>
+        <button id="reset-db-btn" class="reset-btn" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; margin-top: 10px; transition: all 0.2s; outline: none;"><i class="fa-solid fa-trash-can"></i> Reset Progress</button>
+      </div>
+      
+      <!-- Code Health Overview Card -->
+      <div class="health-card">
+        <div class="progress-ring-container">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="progress-ring-circle-bg" stroke="rgba(255, 255, 255, 0.05)" stroke-width="6" fill="transparent" r="34" cx="40" cy="40"/>
+            <circle class="progress-ring-circle" id="health-ring" stroke="var(--success)" stroke-width="6" fill="transparent" r="34" cx="40" cy="40"/>
+          </svg>
+          <div class="health-score-text" id="health-score-val">--</div>
+        </div>
+        <div class="health-meta">
+          <h3>Code Health Score</h3>
+          <p id="health-level">Compile code to calculate health</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Left Column: Diagnostic Analytics -->
+      <div class="dash-card card-analytics">
+        <h2><i class="fa-solid fa-chart-simple"></i> Concept Mastery</h2>
+        
+        <div class="mastery-item">
+          <div class="mastery-label">
+            <span>Variables & Types</span>
+            <span id="mast-vars-pct">0%</span>
+          </div>
+          <div class="mastery-bar-container"><div class="mastery-bar" id="mast-vars" style="width: 0%"></div></div>
+        </div>
+        
+        <div class="mastery-item">
+          <div class="mastery-label">
+            <span>Conditionals (if/else)</span>
+            <span id="mast-cond-pct">0%</span>
+          </div>
+          <div class="mastery-bar-container"><div class="mastery-bar" id="mast-cond" style="width: 0%"></div></div>
+        </div>
+        
+        <div class="mastery-item">
+          <div class="mastery-label">
+            <span>Loops (for/while)</span>
+            <span id="mast-loops-pct">0%</span>
+          </div>
+          <div class="mastery-bar-container"><div class="mastery-bar" id="mast-loops" style="width: 0%"></div></div>
+        </div>
+        
+        <div class="mastery-item">
+          <div class="mastery-label">
+            <span>Functions & Scope</span>
+            <span id="mast-funcs-pct">0%</span>
+          </div>
+          <div class="mastery-bar-container"><div class="mastery-bar" id="mast-funcs" style="width: 0%"></div></div>
+        </div>
+        
+        <div class="mastery-item">
+          <div class="mastery-label">
+            <span>Arrays & Data Structures</span>
+            <span id="mast-arrays-pct">0%</span>
+          </div>
+          <div class="mastery-bar-container"><div class="mastery-bar" id="mast-arrays" style="width: 0%"></div></div>
+        </div>
+      </div>
+
+      <!-- Center Column: Session Metrics -->
+      <div class="dash-card card-stats">
+        <h2><i class="fa-solid fa-gauge-high"></i> Session Diagnostics</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-val" id="stat-lines">0</div>
+            <div class="stat-lbl">Lines Written</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-compiles">0</div>
+            <div class="stat-lbl">Compiles Run</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-complexity">Beginner</div>
+            <div class="stat-lbl">Complexity Level</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-challenges">0/5</div>
+            <div class="stat-lbl">Challenges Solved</div>
+          </div>
+        </div>
+        
+        <h3 class="bug-log-title"><i class="fa-solid fa-triangle-exclamation"></i> Identified Code Pitfalls / Logic Bugs</h3>
+        <div class="bug-alert-box" id="dashboard-bug-box">
+          No pitfalls detected yet. Run code to analyze logical edge cases.
+        </div>
+      </div>
+
+      <!-- Right Column: Learning Roadmap & Recommendations -->
+      <div class="dash-card card-roadmap">
+        <h2><i class="fa-solid fa-graduation-cap"></i> AI Mentor's Recommendation</h2>
+        <div class="mentor-feedback-card" id="dashboard-mentor-feedback">
+          💡 Write some code and execute it in the compiler. I will analyze your implementation and write custom tips here to guide your studies!
+        </div>
+
+        <h2 style="margin-top: 25px;"><i class="fa-solid fa-medal"></i> Achievements Unlocked</h2>
+        <div class="badges-container">
+          <div class="badge-item locked" id="badge-first">
+            <i class="fa-solid fa-flag"></i>
+            <span>First Compile</span>
+          </div>
+          <div class="badge-item locked" id="badge-loop">
+            <i class="fa-solid fa-arrows-spin"></i>
+            <span>Loop Overlord</span>
+          </div>
+          <div class="badge-item locked" id="badge-clean">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Clean Coder</span>
+          </div>
+          <div class="badge-item locked" id="badge-bug">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Bug Hunter</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WebAssembly Runtime and Transpiler CDNs -->
+  <!-- 1. Pyodide for Python client-side compilation -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  
+  <!-- 2. sql.js for SQL client-side execution -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+
+  <!-- 3. TypeScript compiler for client-side TS transpile -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/5.0.4/typescript.min.js"></script>
+
+  <!-- RequireJS to load Monaco Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+  <!-- Application Logic -->
+  <script src="script.js?v=3"></script>
+</body>
+</html>
